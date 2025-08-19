@@ -1,33 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from 'react';
+// import { useState } from 'react'
 import './App.css'
-
+import Navbar from './component/Navbar';
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+   <Navbar/>
+ <div className="text-center mt-10 px-4">
+  <h1 className="text-4xl lg:text-5xl font-bold leading-snug">
+    Prenez votre <span className="text-[#0FDCBC]">rendez-vous</span> <br />
+    <span className="text-[#0FDCBC]">médical</span> en quelques clics !
+  </h1>
+  <p className="mt-4 text-gray-600 text-lg">
+    Trouvez votre clinique et réservez facilement en ligne, <br />
+    où que vous soyez.
+  </p>
+</div>
+
     </>
   )
 }
