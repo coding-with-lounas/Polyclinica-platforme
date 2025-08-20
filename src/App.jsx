@@ -1,13 +1,19 @@
 import React from 'react';
 // import { useState } from 'react'
-import './App.css'
+import './App.css';
+import "./index.css"; 
 import Navbar from './component/Navbar';
+import Search from './component/Search';
+import OurStat from './component/OurStat'
+import HowItWorks from './component/HowItWorks';
+
 function App() {
      
   return (
     <>
+<div>
    <Navbar/>
- <div className="relative text-center mt-10 px-4 top-[80px]">
+   <div className="relative text-center mt-10 px-4 top-[62px]">
   <h1 className=" text-4xl lg:text-5xl font-bold leading-snug font-sans">
     Prenez votre <span className="text-[#0FDCBC]">rendez-vous</span> <br />
     <span className="text-[#0FDCBC]">médical</span> en quelques clics !
@@ -16,8 +22,11 @@ function App() {
     Trouvez votre clinique et réservez facilement en ligne, <br />
     où que vous soyez.
   </p>
+  <Search />
+   </div>
+   <div><OurStat/></div>
+   <HowItWorks/>
 </div>
-
     </>
   )
 }
