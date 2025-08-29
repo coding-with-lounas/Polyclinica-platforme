@@ -2,11 +2,15 @@ import React from 'react';
 // import { useState } from 'react'
 import './App.css';
 import "./index.css"; 
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
 import Navbar from './component/Navbar';
 import Search from './component/Search';
 import OurStat from './component/OurStat'
 import HowItWorks from './component/HowItWorks';
-
+import MySwiper from './component/MySwiper'
 function App() {
      
   return (
@@ -26,7 +30,8 @@ function App() {
    </div>
    <div><OurStat/></div>
    <HowItWorks/>
-</div>
+   <MySwiper/>
+    </div>
     </>
   )
 }
