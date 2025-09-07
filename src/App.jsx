@@ -11,6 +11,10 @@ import Search from './component/Search';
 import OurStat from './component/OurStat'
 import HowItWorks from './component/HowItWorks';
 import MySwiper from './component/MySwiper'
+import Faqs from './component/Faqs';
+
+
+
 function App() {
      
   return (
@@ -30,7 +34,8 @@ function App() {
    </div>
    <div><OurStat/></div>
    <HowItWorks/>
-   <MySwiper/>
+   {/* <MySwiper/> */}
+   <Faqs/>
     </div>
     </>
   )

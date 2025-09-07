@@ -96,12 +96,21 @@ import 'swiper/css';
 //   );
 // }
 
+
 export default function MySwiper() {
   return (
-    <Swiper spaceBetween={50} slidesPerView={3}>
-      <SwiperSlide>Slide 1</SwiperSlide>
-      <SwiperSlide>Slide 2</SwiperSlide>
-      <SwiperSlide>Slide 3</SwiperSlide>
-    </Swiper>
+    <main>
+        <swiper-container modules={[Scrollbar, Mousewheel]}
+      slidesPerView={3}
+      spaceBetween={20}
+      mousewheel={{ invert: true }}
+      scrollbar={{ draggable: true, clickable: true }}>
+            <swiper-slide>Slide1</swiper-slide>
+            <swiper-slide>Slide2</swiper-slide>
+            <swiper-slide>Slide3</swiper-slide>
+            <swiper-slide>Slide4</swiper-slide>
+            <swiper-slide>Slide5</swiper-slide>
+        </swiper-container>
+    </main>
   );
 }
