@@ -1,11 +1,12 @@
 
-import * as React from 'react';
+// import * as React from 'react';
 import Accordion from '@mui/material/Accordion';
 // import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useState } from 'react';
 // import Button from '@mui/material/Button';
 export default function Faqs() {
    const faq = [
@@ -26,20 +27,54 @@ export default function Faqs() {
     answer: "Vous recevrez une notification par email et/ou SMS dès que votre rendez-vous est confirmé par la clinique ou le médecin."
   }
 ];
-
-
+  const [expanded, setExpanded] = useState(false);
+ const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
   return (
-    <div>
+    <div className='w-[50%] mx-auto p-4'>
        {faq.map((item,index)=>(
-         <Accordion>
+         <Accordion className="mb-3 rounded-2xl "
+         expanded={expanded === index}
+          onChange={handleChange(index)}
+          sx={{
+            borderRadius: "1rem",  // 👈 round the whole accordion
+            overflow: "hidden",
+            backgroundColor: expanded === index ? 'rgba(7,217,191,0.07)' : '#ffffff',
+            transition: "background-color 0.3s ease"
+          }}
+         >
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon  sx={{ color: expanded === index ? "#02D6C6" : "#000000" }} />}
           aria-controls={`panel${index+1}-content`}
           id={`panel${index + 1}-header`}
-        >
-          <Typography component="span">{item.question}</Typography>
+          className="bg-[02D6C6] to-teal-50 rounded-t-2xl"
+           sx={{
+    height: "86.42px", 
+    flexDirection: "row-reverse", // move icon to left
+    "& .MuiAccordionSummary-expandIconWrapper": {
+      marginRight: "8px", // spacing between icon and text 
+      }}
+    }
+          >
+            
+          <Typography 
+  component="span" 
+  sx={{ fontWeight: "bold", color: expanded === index ? "#02D6C6" : "#000000",
+    fontSize: "1.25rem",
+    lineHeight: 1.6,     // espace vertical entre lignes
+    letterSpacing: "0.5px", // léger espacement horizontal
+    paddingY: "6px",     // espace haut/bas
+
+  }}
+>
+  {item.question}
+</Typography>
+
         </AccordionSummary>
-        <AccordionDetails>{item.answer}</AccordionDetails>
+        <AccordionDetails sx={{color: 'rgba(0, 44, 34, 0.7)',
+             height:'100px'
+        }}>{item.answer}</AccordionDetails>
       </Accordion>
       
        ))}
