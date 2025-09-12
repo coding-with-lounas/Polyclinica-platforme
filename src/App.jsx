@@ -12,7 +12,7 @@ import OurStat from './component/OurStat'
 import HowItWorks from './component/HowItWorks';
 import MySwiper from './component/MySwiper'
 import Faqs from './component/Faqs';
-
+import Footer from './component/Footer';
 
 
 function App() {
@@ -34,8 +34,9 @@ function App() {
    </div>
    <div><OurStat/></div>
    <HowItWorks/>
-   {/* <MySwiper/> */}
+   <MySwiper/>
    <Faqs/>
+   <Footer/>
     </div>
     </>
   )

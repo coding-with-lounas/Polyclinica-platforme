@@ -64,3 +64,15 @@ swiper-slide:nth-child(4) {
 swiper-slide:nth-child(5) {
     background-color: rgb(34 197 94);
 }
+
+
+.footerpage {
+  position: relative;
+  background-color: #fff;
+  background-image:
+    url("../assets/logopolyclinica.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position: 8% 12%, 92% 85%; /* tweak positions */
+  background-size: 48px 48px, 64px 64px;  /* sizes for each image */
+  padding: 4rem 1rem;
+}
