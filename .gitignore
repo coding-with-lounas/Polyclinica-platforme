@@ -1,3 +1,20 @@
+# Environment Variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+*.env
+
+# Frontend (Node.js/React/Vite)
+node_modules/
+dist/
+dist-ssr/
+*.local
+build/
+.cache/
+coverage/
+
 # Logs
 logs
 *.log
@@ -7,18 +24,63 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Backend (Django/Python)
+*.py[cod]
+*$py.class
+*.so
+.Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+*.log
+# db.sqlite3
+# db.sqlite3-journal
+# media/
+# staticfiles/
+# static_root/
 
-# Editor directories and files
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv
+virtualenv/
+.virtualenv/
+*.venv
+
+# Django
+*.log
+# local_settings.py
+# db.sqlite3
+# db.sqlite3-journal
+# /media
+# /staticfiles
+# celerybeat-schedule
+# celerybeat.pid
+
+# IDE & Editors
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
+*.swp
+*.swo
+*~
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+.project
+.classpath
+.settings/
+
+# OS
+# Thumbs.db
+# ehthumbs.db
+# Desktop.ini
