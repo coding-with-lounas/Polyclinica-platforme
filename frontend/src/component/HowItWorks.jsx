@@ -1,8 +1,8 @@
-import React from "react";
 import Vector from '../assets/Vector.svg'
 import date from '../assets/Date.svg'
 import searchclinique from '../assets/searchClinique.svg'
-
+import VectorLf from '../assets/VectorLf.svg';
+import VectorLr from '../assets/VectorLr.svg';
 
 
 const HowItWorks = () => {
@@ -23,9 +23,14 @@ const HowItWorks = () => {
 </p>
               </div>
               </div>
-              <img src={searchclinique} alt='Clinique' className="w-[198px] h-[heigh] mx-auto mb-4" />
 
+            
+              <img src={searchclinique} alt='Clinique' className="w-[198px] h-[heigh] mx-auto mb-4" />
               </div>
+
+              {/* the left line one */}
+          <img src={VectorLf} alt="line left" className="w-full" />
+
               <div className="bg-white p-6  hover:shadow-lg transition flex gap-4" >
               <img src={date} alt='Calendar' className="w-[198px] h-[heigh] mx-auto mb-4" />
              <div className="flex">
@@ -37,6 +42,7 @@ const HowItWorks = () => {
 
               </div>
               </div>
+          <img src={VectorLr} alt="line left" className="w-full" />
 
             <div className="bg-white p-6  hover:shadow-lg transition flex gap-4" >
              <div className="flex">
