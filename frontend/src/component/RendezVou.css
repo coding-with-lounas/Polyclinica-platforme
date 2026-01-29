@@ -1,0 +1,66 @@
+/* Le conteneur principal */
+.rendez-vou-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.rendez-vou {
+  position: relative;
+  background-color: white;
+  width: 400px;
+  height: 600px;
+  border-radius: 15px;
+  padding-top: 16px;
+  padding-right: 32px;
+  padding-bottom: 16px;
+  padding-left: 32px;
+  gap: 10px;
+  angle: 0 deg;
+  opacity: 1;
+}
+
+.rendez {
+  width: 336px;
+  height: 568px;
+  gap: 30px;
+  angle: 0 deg;
+  opacity: 1;
+}
+.rendez-header {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.civilite {
+  width: 100%;
+  height: 50px;
+  gap: 8px;
+  angle: 0 deg;
+  opacity: 1;
+}
+
+.Nom-Prenom {
+  width: 291px;
+  height: 50px;
+  display: grid;
+  grid-template-columnsj: 1fr;
+  gap: 16px;
+  angle: 0 deg;
+  opacity: 1;
+}
+
+.email {
+  display: flex;
+  flex-direction: column;
+  angle: 0 deg;
+  opacity: 1;
+}

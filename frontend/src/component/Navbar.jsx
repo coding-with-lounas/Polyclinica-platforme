@@ -1,6 +1,9 @@
 import logo from "../assets/logo-header.svg";
+import { useContext } from "react";
+import { AppContext } from "../context/appContext";
 
 const Navbar = () => {
+  const { handleSignIn } = useContext(AppContext);
   return (
     <header className="flex items-center justify-evenly  z-30 h-15 shadow-level-2 lg:h-[92px] bg-surface-neutral-high shadow-level-2">
       <div className="logo-header">
@@ -39,8 +42,8 @@ const Navbar = () => {
 
       <div>
         <a
-          href=""
-          className="px-4 py-2 rounded-xl bg-[#0FDCBC] text-white hover:bg-[#0cc7a9] transition"
+          onClick={handleSignIn}
+          className="px-4 py-2 rounded-xl bg-[#0FDCBC] text-white hover:cursor-pointer hover:bg-[#0cc7a9] transition"
         >
           se connecter
         </a>
