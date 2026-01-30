@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { AppContext } from "../context/appContext";
 
 function RendezVou() {
-  const { handleForm } = useContext(AppContext);
+  const { handleForm , handleCalendar, handleCalendarClose , handleSchedule } = useContext(AppContext);
   return (
     <div className="rendez-vou-container">
       <div className="rendez-vou">
@@ -107,6 +107,7 @@ function RendezVou() {
                       <div>
                         <input
                           type="text"
+                          onFocus={handleCalendar}
                           className="w-40 h-10 px-4 py-3 border border-gray-300 rounded-4xl focus:ring-2 focus:ring-[#0FDCBC] focus:border-transparent"
                           placeholder="jj / mm / aaaa"
                           required
@@ -137,6 +138,7 @@ function RendezVou() {
                   <div>
                     <input
                       type="text"
+                      onFocus={handleSchedule}
                       className="w-84 h-10 px-4 py-3 border border-gray-300 rounded-4xl focus:ring-2 focus:ring-[#0FDCBC] focus:border-transparent mt-2"
                       placeholder="18 / 08 / 2026 à 11:15"
                       required

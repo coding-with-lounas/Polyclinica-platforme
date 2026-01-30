@@ -26,6 +26,10 @@ body {
   background: white;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   border: 1px solid #e0e0e0;
+  position: fixed;
+  top: 5%;
+  left: 10%;
+  z-index: 1000;
 }
 
 .calendar-header {
@@ -49,8 +53,8 @@ body {
 .weekday {
   text-align: center;
   font-size: 14px;
-  font-weight: 500;
-  color: #666;
+  font-weight: 600;
+  color: black;
   padding: 8px 0;
 }
 
@@ -147,3 +151,52 @@ body {
 .confirm-btn:hover {
   background-color: #1565c0;
 }
+
+/* ... votre CSS existant ... */
+
+/* Style for selected day - keeps the hover effect */
+.calendar-day.selected {
+  background-color: #1976d2; /* Blue background */
+  color: white; /* White text */
+  border: 2px solid #1976d2; /* Blue border */
+  transform: translateY(-1px); /* Slight lift */
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3); /* Blue shadow */
+  font-weight: 500; /* Bold text */
+  z-index: 1; /* Bring to front */
+  position: relative; /* Needed for z-index */
+}
+
+/* Modify hover to not override selected state */
+.calendar-day:hover:not(.selected) {
+  background-color: #f8fbff; /* Light blue background on hover */
+  border: 2px solid #1976d2; /* Blue border on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.2); /* Blue shadow */
+  color: #1976d2; /* Change text color to blue */
+  font-weight: 500; /* Slightly bolder text */
+  z-index: 1; /* Bring to front for shadow visibility */
+  position: relative; /* Needed for z-index */
+  cursor: pointer;
+}
+
+/* For selected days in other months (if needed) */
+.calendar-day.other-month.selected {
+  background-color: #90a4ae; /* Gray-blue for other months */
+  color: white;
+  border: 2px solid #90a4ae;
+}
+
+/* Keep the hover for today even when it's selected */
+.calendar-day.today.selected {
+  background-color: #1976d2;
+  color: white;
+  border: 2px solid #1976d2;
+}
+
+/* When hovering over already selected day */
+.calendar-day.selected:hover {
+  background-color: #1565c0; /* Darker blue on hover */
+  border: 2px solid #1565c0;
+  box-shadow: 0 4px 12px rgba(21, 101, 192, 0.4);
+}
+

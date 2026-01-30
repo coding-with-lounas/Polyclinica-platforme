@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { AppContext } from "../../context/appContext";
 
 function Sign_up() {
-  const { handleSignUpClose } = useContext(AppContext);
+  const { handleSignUpClose , handleCalendar } = useContext(AppContext);
 
     
 
@@ -142,6 +142,7 @@ function Sign_up() {
                       <div>
                         <input
                           type="text"
+                          onFocus={handleCalendar}
                           className="w-40 h-10 px-4 py-3 border border-gray-300 rounded-4xl focus:ring-2 focus:ring-[#0FDCBC] focus:border-transparent"
                           placeholder="jj / mm / aaaa"
                           required

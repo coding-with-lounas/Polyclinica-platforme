@@ -6,10 +6,17 @@ export const AppProvider = ({ children }) => {
   const [isBlurred, setIsBlurred] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [showSchedule, setShowSchedule] = useState(false);
+  const [showLocation, setShowLocation] = useState(false);
 
   const handleForm = () => {
     setShowForm(!showForm);
     setIsBlurred(!isBlurred);
+    setShowSignIn(false);
+    setShowSignUp(false);
+    setShowCalendar(false);
+    setShowSchedule(false);
   };
 
   const handleSignIn = () => {
@@ -23,13 +30,44 @@ export const AppProvider = ({ children }) => {
   };
 
   const handleSignUpClose = () => {
-      setShowSignUp(!showSignUp);
-      setIsBlurred(!isBlurred);
-    }
+    setShowSignUp(!showSignUp);
+    setIsBlurred(!isBlurred);
+    setShowCalendar(false);
+  };
+
+  const handleCalendar = () => {
+    setShowCalendar(!showCalendar);
+    setShowSchedule(false);
+  };
+
+  const handleSchedule = () => {
+    setShowSchedule(!showSchedule);
+    setShowCalendar(false);
+  };
+
+  const handleLocation = () => {
+    setShowLocation(!showLocation);
+  }
+
 
   return (
     <AppContext.Provider
-      value={{ handleForm, handleSignIn, handleSignUp, handleSignUpClose, showForm, isBlurred, showSignIn, showSignUp }}
+      value={{
+        handleForm,
+        handleSignIn,
+        handleSignUp,
+        handleSignUpClose,
+        handleCalendar,
+        handleSchedule,
+        handleLocation,
+        showForm,
+        isBlurred,
+        showSignIn,
+        showSignUp,
+        showCalendar,
+        showSchedule,
+        showLocation,
+      }}
     >
       {children}
     </AppContext.Provider>

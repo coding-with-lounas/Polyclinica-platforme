@@ -1,13 +1,17 @@
 import React from "react";
 import localisation from "../assets/localisation.svg";
+import { useContext } from "react";
+import { AppContext } from "../context/appContext";
 
-const Search = ({ handleForm }) => {
+const Search = () => {
+  const { handleForm , handleLocation } = useContext(AppContext);
   return (
     <div className="w-full bg-gray-100/10 px-4 py-3 rounded-lg mt-10 max-w-3xl mx-auto">
       <div className="relative flex items-center">
         {/* search icon */}
         <img
-          className="absolute left-3 h-5 w-5 "
+          className="absolute left-3 h-5 w-5 cursor-pointer hover:opacity-80 hover:scale-105 transition duration-200"
+          onClick={handleLocation}
           src={localisation}
           alt="search"
         />
