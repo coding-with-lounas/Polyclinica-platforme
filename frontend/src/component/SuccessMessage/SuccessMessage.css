@@ -1,0 +1,23 @@
+.Success {
+  width: 469px;
+  height: 97.4000015258789px;
+  border-radius: 12px;
+  gap: 19.2px;
+  angle: 0 deg;
+  opacity: 1;
+  padding-top: 19.2px;
+  padding-right: 25.6px;
+  padding-bottom: 25.6px;
+  padding-left: 19.2px;
+  text-color: #1aa053;
+  border: 0.8px solid #1aa053;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #f0fdf4;
+}

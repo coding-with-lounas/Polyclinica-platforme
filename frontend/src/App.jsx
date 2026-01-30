@@ -16,6 +16,10 @@ import RendezVou from "./component/RendezVou";
 import Sign_in from "./component/sign_in/Sign_in";
 import Sign_up from "./component/sign_up/Sign_up";
 import { AppContext } from "./context/appContext";
+import WilayaList from "./component/WilayaList/WilayaList";
+import Location from "./component/WilayaList/Location";
+import SuccessMessage from "./component/SuccessMessage/SuccessMessage";
+import ErrorMessage from "./component/ErrorMessage/ErrorMessage";
 
 function App() {
   const { handleForm, showForm, isBlurred, showSignIn , showSignUp } = useContext(AppContext);
@@ -47,6 +51,7 @@ function App() {
       {showForm && <RendezVou />}
       {showSignIn && <Sign_in />}
       {showSignUp && <Sign_up />}
+      <SuccessMessage />
     </>
   );
 }
