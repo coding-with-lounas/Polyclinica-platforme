@@ -1,0 +1,279 @@
+/* Bootstrap Icons CDN needed */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+.doctor-card {
+  width: 568px;
+  height: 226px;
+  opacity: 1;
+  border: 1px solid #e0e0e0;
+  border-radius: 15px;
+
+  /* Grid layout */
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  gap: 10px;
+  grid-template-areas: "avatar info side";
+
+  /* Background and shadow */
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  /* overflow: hidden; */
+
+  /* Positioning if needed */
+  position: relative;
+
+  /* Internal padding */
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* Doctor Avatar */
+.doctor-avatar {
+  grid-area: avatar;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 10%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  align-self: center;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.avatar-initials {
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.doctor-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Doctor Info Section */
+.doctor-info {
+    margin-top: 18px;
+  grid-area: info;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.doctor-name {
+  font-family:
+ -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-left: 30px;
+  line-height: 1.2;
+}
+
+.doctor-specialty {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #2b2828;
+  background: #ddd;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.contact-item {
+     margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.contact-item i {
+  font-size: 16px;
+  color: #667eea;
+  width: 20px;
+  text-align: center;
+}
+
+.contact-item span {
+   
+  font-size: 14px;
+  color: #555;
+  font-weight: 400;
+}
+
+/* Side Section (Rating & Button) */
+.doctor-side {
+  grid-area: side;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.rating-section {
+  text-align: center;
+}
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.star {
+  font-size: 18px;
+  color: #ffd700;
+}
+
+.star.half {
+  position: relative;
+  color: #ffd700;
+}
+
+.star.half::after {
+  content: "☆";
+  position: absolute;
+  left: 0;
+  color: #e0e0e0;
+  z-index: -1;
+}
+
+.star.empty {
+  color: #e0e0e0;
+}
+
+.rating-text {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  color: #7f8c8d;
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+/* Book Appointment Button */
+.book-btn {
+  background: #0FDCBC;
+
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 12px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  min-width: 180px;
+  justify-content: center;
+  margin-left: 20px;
+}
+
+.book-btn i {
+  font-size: 18px;
+}
+
+.book-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+.book-btn:active {
+  transform: translateY(0);
+}
+
+.book-btn:focus {
+  outline: 2px solid rgba(102, 126, 234, 0.5);
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .doctor-card {
+    width: 90%;
+    height: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "avatar"
+      "info"
+      "side";
+    gap: 20px;
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  .doctor-avatar {
+    width: 100px;
+    height: 100px;
+    justify-self: center;
+  }
+
+  .doctor-info {
+    padding: 0;
+    text-align: center;
+  }
+
+  .doctor-specialty {
+    align-self: center;
+  }
+
+  .contact-item {
+    justify-content: center;
+  }
+
+  .doctor-side {
+    align-items: center;
+  }
+
+  .rating-stars {
+    justify-content: center;
+  }
+
+  .book-btn {
+    width: 100%;
+  }
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.doctor-card {
+  animation: fadeIn 0.6s ease-out;
+}

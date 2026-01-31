@@ -9,6 +9,7 @@ export const AppProvider = ({ children }) => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [showSchedule, setShowSchedule] = useState(false);
   const [showLocation, setShowLocation] = useState(false);
+  const [showSearchResults, setShowSearchResults] = useState(false);
 
   const handleForm = () => {
     setShowForm(!showForm);
@@ -49,6 +50,10 @@ export const AppProvider = ({ children }) => {
     setShowLocation(!showLocation);
   }
 
+  const handleSearchResults = () => {
+    setShowSearchResults(!showSearchResults);
+  }
+
 
   return (
     <AppContext.Provider
@@ -60,6 +65,7 @@ export const AppProvider = ({ children }) => {
         handleCalendar,
         handleSchedule,
         handleLocation,
+        handleSearchResults,
         showForm,
         isBlurred,
         showSignIn,
@@ -67,6 +73,7 @@ export const AppProvider = ({ children }) => {
         showCalendar,
         showSchedule,
         showLocation,
+        showSearchResults,
       }}
     >
       {children}
