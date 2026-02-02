@@ -6,9 +6,18 @@ function Calendar() {
   const [selectedDay, setSelectedDay] = useState(null);
   const [currentDate, setCurrentDate] = useState(new Date(2025, 6, 1)); // Juillet 2025 par défaut (mois 6 car 0-indexé)
   const [showYearDropdown, setShowYearDropdown] = useState(false);
-  const { handleCalendar } = React.useContext(AppContext);
+  const { handleCalendar , updateSelectedDate } = React.useContext(AppContext);
   
   const yearDropdownRef = useRef(null);
+
+  // Fonction pour formater la date au format jj/mm/aaaa
+  const formatDateToFrench = (date) => {
+    if (!date) return "";
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
   
   // Fermer le dropdown si on clique en dehors
   useEffect(() => {
@@ -111,11 +120,17 @@ function Calendar() {
 
   // Fonction pour gérer le clic sur un jour
   const handleDayClick = (dayInfo) => {
+    let clickedDate;
+    
     if (dayInfo.isOtherMonth) {
       // Si on clique sur un jour du mois précédent/suivant, naviguer vers ce mois
+      clickedDate = new Date(dayInfo.date.getFullYear(), dayInfo.date.getMonth(), dayInfo.date.getDate());
       setCurrentDate(new Date(dayInfo.date.getFullYear(), dayInfo.date.getMonth(), 1));
+    } else {
+      clickedDate = new Date(dayInfo.date.getFullYear(), dayInfo.date.getMonth(), dayInfo.date.getDate());
     }
-    setSelectedDay(dayInfo.date);
+    
+    setSelectedDay(clickedDate);
   };
 
   // Vérifier si un jour est sélectionné
@@ -127,6 +142,25 @@ function Calendar() {
       dayInfo.date.getMonth() === selectedDay.getMonth() &&
       dayInfo.date.getFullYear() === selectedDay.getFullYear()
     );
+  };
+
+  // Fonction pour confirmer la sélection
+  const handleConfirm = () => {
+    if (selectedDay) {
+      // Formater la date
+      const formattedDate = formatDateToFrench(selectedDay);
+      
+      // Envoyer la date au contexte
+      updateSelectedDate(selectedDay);
+      
+      // Afficher dans la console pour vérification
+      console.log("Date sélectionnée:", formattedDate);
+      
+      
+
+      // Fermer le calendrier
+      handleCalendar();
+    }
   };
 
   // Aller au mois précédent
@@ -252,9 +286,15 @@ function Calendar() {
             handleCalendar();
           }}
         >
-          Cancel
+          Annuler
         </button>
-        <button className="calendar-btn confirm-btn">Confirmer</button>
+        <button 
+          className="calendar-btn confirm-btn"
+          onClick={handleConfirm}
+          disabled={!selectedDay} // Désactiver si aucune date sélectionnée
+        >
+          Confirmer
+        </button>
       </div>
     </div>
   );

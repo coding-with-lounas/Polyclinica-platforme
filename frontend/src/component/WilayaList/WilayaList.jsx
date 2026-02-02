@@ -1,20 +1,8 @@
 import React from 'react';
 import './WilayaList.css';
+import { wilayas } from './mocks';
 
 const WilayaList = () => {
-  const wilayas = [
-    "Wilaya 1",
-    "Wilaya 2", 
-    "Wilaya 3",
-    "Wilaya 4",
-    "Wilaya 5",
-    "Wilaya 6",
-    "Wilaya 7",
-    "Wilaya 8",
-    "Tipaza",
-    "Wilaya 10",
-    "Wilaya 11"
-  ];
 
   return (
     <div className="wilaya-container">
@@ -29,7 +17,7 @@ const WilayaList = () => {
             className="wilaya-item"
             data-special={wilaya === "Tipaza" ? "true" : undefined}
           >
-            <span className="wilaya-text">{wilaya}</span>
+            <span className="wilaya-text">{wilaya.name}</span>
             <div className="wilaya-arrow">›</div>
           </div>
         ))}

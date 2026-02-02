@@ -1,7 +1,7 @@
 /* Schedule.css */
 
 .schedule-container {
-  width: 450px;
+  width: 475px;
   height: 315px;
   border-radius: 15px;
   padding: 16px;
@@ -152,3 +152,11 @@
 }
 
 
+.taked {
+  background: black;
+}
+
+.taked:hover {
+  background: black;
+  cursor: not-allowed;
+}
