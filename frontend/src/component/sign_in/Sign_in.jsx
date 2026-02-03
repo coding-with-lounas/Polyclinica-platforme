@@ -1,15 +1,14 @@
 import React from "react";
-
-import "../RendezVou.css";
 import logo from "../../assets/logo-header.svg";
 import { useContext } from "react";
 import { AppContext } from "../../context/appContext";
 
 function Sign_in() {
-  const { handleSignIn , handleSignUp } = useContext(AppContext);
+  const { handleSignIn, handleSignUp } = useContext(AppContext);
+  
   return (
-    <div className="rendez-vou-container ">
-      <div className="rendez-vou">
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
+      <div className="relative bg-white w-[400px] h-[600px] rounded-2xl pt-4 pr-8 pb-4 pl-8 gap-2.5">
         <div className="absolute top-4 right-4 z-50">
           <button
             onClick={handleSignIn}
@@ -18,19 +17,18 @@ function Sign_in() {
             <i className="fa-solid fa-x text-sm transition-transform"></i>
           </button>
         </div>
-        <div className="rendez">
-          <div className="rendez-header">
+        <div className="w-[336px] h-[568px] flex flex-col">
+          <div className="mb-5 flex flex-col justify-center items-center">
             <img src={logo} alt="logo-Polyclinica" />
-            <p className="text-gray-500">Acceder a votre espace patient</p>
+            <p className="text-gray-500 mt-2">Acceder a votre espace patient</p>
           </div>
-          <div className="rendez-body">
+          <div>
             <form>
-              <div className="civilite">
-                <div className="email mt-12">
+              <div className="w-full h-12.5 gap-2">
+                <div className="flex flex-col mt-12">
                   <label className="block text-sm font-medium text-gray-700">
                     Adresse e-mail
                   </label>
-                  {/* Email */}
                   <div>
                     <input
                       type="email"
@@ -40,21 +38,20 @@ function Sign_in() {
                     />
                   </div>
                 </div>
-                <div className="email mt-7">
+                <div className="flex flex-col mt-7">
                   <label className="block text-sm font-medium text-gray-700">
                     Mote de passe
                   </label>
-                  {/* Email */}
                   <div>
                     <input
-                      type="text"
+                      type="password"
                       className="w-84 h-14 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#0FDCBC] focus:border-transparent mt-2"
                       placeholder="Entrer votre mote de passe"
                       required
                     />
                   </div>
                 </div>
-                <div className="flex items-center justify-between mt-7 gap-3 ">
+                <div className="flex items-center justify-between mt-7 gap-3">
                   <div className="flex items-center">
                     <input
                       type="checkbox"
@@ -69,24 +66,24 @@ function Sign_in() {
                     Mot de passe oublié ?
                   </a>
                 </div>
-                <div className="email mt-8">
+                <div className="flex flex-col mt-8">
                   <button className="relative w-84 h-10 border-transparent bg-gradient-to-r from-[#0FDCBC] to-[#0dc9af] rounded-4xl text-white font-bold shadow-lg hover:cursor-pointer hover:shadow-[0_0_25px_rgba(15,220,188,0.6)] transition-all duration-500 group">
                     <span className="group-hover:text-white/90">Submit</span>
-
-                    {/* Effet neon externe */}
                     <span className="absolute -inset-1 bg-gradient-to-r from-[#0FDCBC] to-[#0dc9af] rounded-4xl blur opacity-0 group-hover:opacity-70 transition-opacity duration-500 -z-10"></span>
                   </button>
                 </div>
               </div>
             </form>
           </div>
-          <div className="rendez-footer">
-            <button className="submit-button"></button>
+          <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex items-center">
+            <p className="text-gray-500 text-xs">pas de compte ? </p>
+            <a 
+              onClick={handleSignUp} 
+              className="ml-2 text-[#0FDCBC] hover:cursor-pointer hover:underline text-xs"
+            >
+              Creer un compte
+            </a>
           </div>
-        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex items-center">
-         <p className="text-gray-500 text-xs">pas de compte ? </p>
-         <a onClick={handleSignUp} className="ml-2 text-[#0FDCBC] hover:cursor-pointer hover:underline text-xs">Creer un compte</a>
-        </div>
         </div>
       </div>
     </div>

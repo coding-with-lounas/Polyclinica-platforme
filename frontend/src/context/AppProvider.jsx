@@ -11,6 +11,7 @@ export const AppProvider = ({ children }) => {
   const [showLocation, setShowLocation] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedAppointment, setSelectedAppointment] = useState(null); 
 
   const handleForm = () => {
     setShowForm(!showForm);
@@ -21,6 +22,7 @@ export const AppProvider = ({ children }) => {
     setShowSchedule(false);
     if (showForm) { // Si le formulaire était ouvert et on le ferme
       setSelectedDate(null);
+      setSelectedAppointment(null);
     }
   };
 
@@ -62,6 +64,10 @@ export const AppProvider = ({ children }) => {
     setSelectedDate(date);
   };
 
+  const updateSelectedAppointment = (appointment) => {
+    setSelectedAppointment(appointment);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -74,6 +80,7 @@ export const AppProvider = ({ children }) => {
         handleLocation,
         handleSearchResults,
         updateSelectedDate,
+        updateSelectedAppointment,
         showForm,
         isBlurred,
         showSignIn,
@@ -83,6 +90,7 @@ export const AppProvider = ({ children }) => {
         showLocation,
         showSearchResults,
         selectedDate,
+        selectedAppointment,
       }}
     >
       {children}

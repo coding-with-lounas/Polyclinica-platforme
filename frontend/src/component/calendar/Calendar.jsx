@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./Calendar.css";
 import { AppContext } from "../../context/appContext";
 
 function Calendar() {
   const [selectedDay, setSelectedDay] = useState(null);
-  const [currentDate, setCurrentDate] = useState(new Date(2025, 6, 1)); // Juillet 2025 par défaut (mois 6 car 0-indexé)
+  const [currentDate, setCurrentDate] = useState(new Date(2025, 6, 1));
   const [showYearDropdown, setShowYearDropdown] = useState(false);
-  const { handleCalendar , updateSelectedDate } = React.useContext(AppContext);
+  const { handleCalendar, updateSelectedDate } = React.useContext(AppContext);
   
   const yearDropdownRef = useRef(null);
 
-  // Fonction pour formater la date au format jj/mm/aaaa
   const formatDateToFrench = (date) => {
     if (!date) return "";
     const day = String(date.getDate()).padStart(2, '0');
@@ -19,7 +17,6 @@ function Calendar() {
     return `${day}/${month}/${year}`;
   };
   
-  // Fermer le dropdown si on clique en dehors
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (yearDropdownRef.current && !yearDropdownRef.current.contains(event.target)) {
@@ -51,34 +48,26 @@ function Calendar() {
     lastYear: new Date().getFullYear(),
   };
 
-  // Vérifier si une année est bissextile
   const isLeapYear = (year) => {
     return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
   };
 
-  // Obtenir le nombre de jours dans un mois donné
   const getDaysInMonth = (year, month) => {
-    if (month === 1) { // Février
+    if (month === 1) {
       return isLeapYear(year) ? 29 : 28;
     }
     return months[month].days;
   };
 
-  // Générer les jours du calendrier pour le mois/année courant
   const generateCalendarDays = () => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     
-    // Premier jour du mois
     const firstDayOfMonth = new Date(year, month, 1);
-    // Dernier jour du mois
     const lastDayOfMonth = new Date(year, month + 1, 0);
-    // Jour de la semaine du premier jour (0 = Dimanche, 1 = Lundi, etc.)
     const firstDayOfWeek = firstDayOfMonth.getDay();
-    // Ajuster pour commencer le lundi (0 = Lundi)
     const adjustedFirstDayOfWeek = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
     
-    // Jours du mois précédent à afficher
     const prevMonthDays = [];
     const prevMonthLastDay = new Date(year, month, 0).getDate();
     
@@ -90,7 +79,6 @@ function Calendar() {
       });
     }
     
-    // Jours du mois courant
     const currentMonthDays = [];
     const daysInMonth = getDaysInMonth(year, month);
     
@@ -102,9 +90,8 @@ function Calendar() {
       });
     }
     
-    // Jours du mois suivant à afficher (pour compléter la grille)
     const nextMonthDays = [];
-    const totalCells = 42; // 6 semaines * 7 jours
+    const totalCells = 42;
     const remainingCells = totalCells - (prevMonthDays.length + currentMonthDays.length);
     
     for (let i = 1; i <= remainingCells; i++) {
@@ -118,12 +105,10 @@ function Calendar() {
     return [...prevMonthDays, ...currentMonthDays, ...nextMonthDays];
   };
 
-  // Fonction pour gérer le clic sur un jour
   const handleDayClick = (dayInfo) => {
     let clickedDate;
     
     if (dayInfo.isOtherMonth) {
-      // Si on clique sur un jour du mois précédent/suivant, naviguer vers ce mois
       clickedDate = new Date(dayInfo.date.getFullYear(), dayInfo.date.getMonth(), dayInfo.date.getDate());
       setCurrentDate(new Date(dayInfo.date.getFullYear(), dayInfo.date.getMonth(), 1));
     } else {
@@ -133,7 +118,6 @@ function Calendar() {
     setSelectedDay(clickedDate);
   };
 
-  // Vérifier si un jour est sélectionné
   const isDaySelected = (dayInfo) => {
     if (!selectedDay) return false;
     
@@ -144,56 +128,49 @@ function Calendar() {
     );
   };
 
-  // Fonction pour confirmer la sélection
+  const isToday = (dayInfo) => {
+    const today = new Date();
+    return (
+      dayInfo.date.getDate() === today.getDate() &&
+      dayInfo.date.getMonth() === today.getMonth() &&
+      dayInfo.date.getFullYear() === today.getFullYear()
+    );
+  };
+
   const handleConfirm = () => {
     if (selectedDay) {
-      // Formater la date
       const formattedDate = formatDateToFrench(selectedDay);
-      
-      // Envoyer la date au contexte
       updateSelectedDate(selectedDay);
-      
-      // Afficher dans la console pour vérification
       console.log("Date sélectionnée:", formattedDate);
-      
-      
-
-      // Fermer le calendrier
       handleCalendar();
     }
   };
 
-  // Aller au mois précédent
   const handlePrevMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
   };
 
-  // Aller au mois suivant
   const handleNextMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
   };
 
-  // Changer d'année
   const handleYearChange = (year) => {
     setCurrentDate(new Date(year, currentDate.getMonth(), 1));
     setShowYearDropdown(false);
   };
 
-  // Changer de mois
   const handleMonthChange = (monthIndex) => {
     setCurrentDate(new Date(currentDate.getFullYear(), monthIndex, 1));
   };
 
-  // Générer la liste des années
   const generateYearList = () => {
     const yearList = [];
     for (let year = years.firstYear; year <= years.lastYear; year++) {
       yearList.push(year);
     }
-    return yearList.reverse(); // Afficher de la plus récente à la plus ancienne
+    return yearList.reverse();
   };
 
-  // Formater la date actuelle pour l'affichage
   const getCurrentMonthYear = () => {
     const monthName = months[currentDate.getMonth()].name;
     const year = currentDate.getFullYear();
@@ -204,15 +181,15 @@ function Calendar() {
   const yearList = generateYearList();
 
   return (
-    <div className="calendar-container">
-      <div className="calendar-header">
+    <div className="fixed top-[5%] left-[10%] z-[1000] w-[332px] h-[491.409px] rounded-[15px] opacity-100 p-6 px-4 flex flex-col bg-white shadow-[0_4px_20px_rgba(0,0,0,0.1)] border border-gray-300">
+      <div className="text-start">
         <div className="flex items-center gap-2">
-          <div className="month-year relative" ref={yearDropdownRef}>
+          <div className="relative" ref={yearDropdownRef}>
             <div 
               className="flex items-center gap-1 cursor-pointer"
               onClick={() => setShowYearDropdown(!showYearDropdown)}
             >
-              <span className="w-27 text-sm">{getCurrentMonthYear()}</span>
+              <span className="w-27 text-sm text-gray-800 font-semibold text-xl mb-4">{getCurrentMonthYear()}</span>
               <button className="cursor-pointer rounded">
                 <i className="fa-solid fa-caret-down"></i>
               </button>
@@ -253,34 +230,54 @@ function Calendar() {
           </div>
         </div>
 
-        <div className="weekdays">
-          <div className="weekday">Mo</div>
-          <div className="weekday">Tu</div>
-          <div className="weekday">We</div>
-          <div className="weekday">Th</div>
-          <div className="weekday">Fr</div>
-          <div className="weekday">Sa</div>
-          <div className="weekday">Su</div>
+        <div className="grid grid-cols-7 gap-1 mb-2">
+          <div className="text-center text-sm font-semibold text-black py-2">Mo</div>
+          <div className="text-center text-sm font-semibold text-black py-2">Tu</div>
+          <div className="text-center text-sm font-semibold text-black py-2">We</div>
+          <div className="text-center text-sm font-semibold text-black py-2">Th</div>
+          <div className="text-center text-sm font-semibold text-black py-2">Fr</div>
+          <div className="text-center text-sm font-semibold text-black py-2">Sa</div>
+          <div className="text-center text-sm font-semibold text-black py-2">Su</div>
         </div>
       </div>
 
-      <div className="calendar-grid">
-        {calendarDays.map((dayInfo, index) => (
-          <div
-            key={index}
-            className={`calendar-day ${dayInfo.isOtherMonth ? "other-month" : ""} ${
-              isDaySelected(dayInfo) ? "selected" : ""
-            }`}
-            onClick={() => handleDayClick(dayInfo)}
-          >
-            {dayInfo.day}
-          </div>
-        ))}
+      <div className="grid grid-cols-7 gap-0.5">
+        {calendarDays.map((dayInfo, index) => {
+          const isSelected = isDaySelected(dayInfo);
+          const isTodayDay = isToday(dayInfo);
+          const isOtherMonth = dayInfo.isOtherMonth;
+          
+          return (
+            <div
+              key={index}
+              className={`
+                text-center py-3 text-sm font-normal text-gray-800 rounded-lg
+                transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]
+                border-2 border-white/50
+                shadow-[0_1px_2px_rgba(0,0,0,0.05)]
+                ${isOtherMonth ? 'text-gray-400 border-gray-100/80' : ''}
+                ${isTodayDay && !isSelected ? 'bg-blue-50 text-blue-600 font-medium' : ''}
+                ${isSelected ? 
+                  'bg-blue-600 text-white border-blue-600 -translate-y-[1px] shadow-[0_4px_12px_rgba(25,118,210,0.3)] font-medium z-10 relative' : 
+                  'hover:bg-blue-50 hover:border-blue-600 hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(25,118,210,0.2)] hover:text-blue-600 hover:font-medium hover:z-10 hover:relative cursor-pointer'
+                }
+                ${isOtherMonth && isSelected ? 'bg-gray-400 text-white border-gray-400' : ''}
+                ${isSelected && 'hover:bg-blue-700 hover:border-blue-700 hover:shadow-[0_4px_12px_rgba(21,101,192,0.4)]'}
+                ${isOtherMonth && !isSelected ? 'hover:bg-gray-50 hover:border-gray-400 hover:text-gray-600' : ''}
+              `}
+              onClick={() => handleDayClick(dayInfo)}
+            >
+              {dayInfo.day}
+            </div>
+          );
+        })}
       </div>
 
-      <div className="calendar-actions">
+      <div className="flex justify-between gap-4 mt-auto">
         <button
-          className="calendar-btn cancel-btn"
+          className="mt-3 flex-1 py-3 rounded-lg border-none text-sm font-medium cursor-pointer
+                   bg-gray-100 text-gray-800 border border-gray-300
+                   hover:bg-gray-200 transition-all duration-200"
           onClick={() => {
             setSelectedDay(null);
             handleCalendar();
@@ -289,9 +286,12 @@ function Calendar() {
           Annuler
         </button>
         <button 
-          className="calendar-btn confirm-btn"
+          className="mt-3 flex-1 py-3 rounded-lg border-none text-sm font-medium cursor-pointer
+                   bg-blue-600 text-white
+                   hover:bg-blue-700 transition-all duration-200
+                   disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={handleConfirm}
-          disabled={!selectedDay} // Désactiver si aucune date sélectionnée
+          disabled={!selectedDay}
         >
           Confirmer
         </button>

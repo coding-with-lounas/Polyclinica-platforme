@@ -8,7 +8,7 @@ export const mockDoctors = [
     phone: "+213 551 23 45 67",
     address: "Alger Centre, Rue Didouche Mourad",
     rating: 4.8,
-    reviews: 127,
+    reviews: 12,
     experience: "15 ans d'expérience",
     price: "3000 DZD",
     availability: "Lundi - Vendredi",

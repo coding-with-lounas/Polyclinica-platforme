@@ -1,14 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
-import "./RendezVou.css";
 import logo from "../assets/logo-header.svg";
 import { AppContext } from "../context/appContext";
 
 function RendezVou() {
-  const { 
-    handleForm, 
-    handleCalendar, 
+  const {
+    handleForm,
+    handleCalendar,
     handleSchedule,
-    selectedDate // Récupère la date du contexte
+    selectedDate,
+    selectedAppointment,
   } = useContext(AppContext);
 
   const [formData, setFormData] = useState({
@@ -18,68 +18,60 @@ function RendezVou() {
     email: "",
     dateNaissance: "",
     telephone: "",
-    dateRendezVous: ""
+    dateRendezVous: "",
   });
 
-  // Fonction pour formater la date au format jj/mm/aaaa
   const formatDateToFrench = (date) => {
     if (!date) return "";
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const year = date.getFullYear();
     return `${day} / ${month} / ${year}`;
   };
 
-  // Mettre à jour le champ dateNaissance quand selectedDate change
   useEffect(() => {
     if (selectedDate) {
       const formattedDate = formatDateToFrench(selectedDate);
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        dateNaissance: formattedDate
+        dateNaissance: formattedDate,
       }));
     } else {
-      // IMPORTANT : Si selectedDate est null, vider le champ
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        dateNaissance: ""
+        dateNaissance: "",
       }));
     }
   }, [selectedDate]);
 
-  // Fonction pour gérer les changements dans les inputs
+  useEffect(() => {
+    if (selectedAppointment) {
+      setFormData((prev) => ({
+        ...prev,
+        dateRendezVous: selectedAppointment.formatted,
+      }));
+    }
+  }, [selectedAppointment]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  // Fonction pour gérer la soumission du formulaire
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Préparer les données pour l'envoi au backend
+
     const submissionData = {
       ...formData,
-      // Convertir la date formatée en objet Date pour le backend
       dateNaissanceObj: selectedDate,
-      // Ou garder la chaîne formatée
-      dateNaissanceFormatted: formData.dateNaissance.replace(/ /g, '') // Enlever les espaces
+      dateNaissanceFormatted: formData.dateNaissance.replace(/ /g, ""),
     };
-    
+
     console.log("Données à envoyer au backend:", submissionData);
-    
-    // Ici tu enverras les données à ton backend
-    // Exemple :
-    // fetch('/api/rendezvous', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(submissionData)
-    // })
-    
-    // Réinitialiser le formulaire
+
     setFormData({
       civilite: "",
       nom: "",
@@ -87,24 +79,15 @@ function RendezVou() {
       email: "",
       dateNaissance: "",
       telephone: "",
-      dateRendezVous: ""
+      dateRendezVous: "",
     });
-    
-    // Fermer le formulaire
+
     handleForm();
   };
 
-  // Fonction pour réinitialiser la date manuellement (optionnel)
-  const handleClearDate = () => {
-    setFormData(prev => ({
-      ...prev,
-      dateNaissance: ""
-    }));
-  };
-
   return (
-    <div className="rendez-vou-container">
-      <div className="rendez-vou">
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
+      <div className="relative bg-white w-[400px] h-[600px] rounded-2xl pt-4 pr-8 pb-4 pl-8 gap-2.5">
         <div className="absolute top-4 right-4 z-50">
           <button
             onClick={handleForm}
@@ -113,14 +96,14 @@ function RendezVou() {
             <i className="fa-solid fa-x text-sm transition-transform"></i>
           </button>
         </div>
-        <div className="rendez">
-          <div className="rendez-header">
+        <div className="w-[336px] h-[568px] flex flex-col">
+          <div className="mb-5 flex flex-col justify-center items-center">
             <img src={logo} alt="logo-Polyclinica" />
-            <p className="text-gray-500">Prendre rapidement un rendez-vous</p>
+            <p className="text-gray-500 mt-2">Prendre rapidement un rendez-vous</p>
           </div>
-          <div className="rendez-body">
+          <div>
             <form onSubmit={handleSubmit}>
-              <div className="civilite">
+              <div className="w-full h-12.5 gap-2">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Civilité
                 </label>
@@ -134,7 +117,7 @@ function RendezVou() {
                       checked={formData.civilite === "Monsieur"}
                       onChange={handleInputChange}
                     />
-                    <span className="text-xs ">Monsieur</span>
+                    <span className="text-xs">Monsieur</span>
                   </label>
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
@@ -145,12 +128,12 @@ function RendezVou() {
                       checked={formData.civilite === "Madame"}
                       onChange={handleInputChange}
                     />
-                    <span className="text-xs ">Madame</span>
+                    <span className="text-xs">Madame</span>
                   </label>
                 </div>
-                <div className="Nom-Prenom">
-                  <div className="flex justify-center gap-4 ">
-                    <div className="flex flex-col ">
+                <div className="w-[291px] h-12.5 grid grid-cols-1 ml-5">
+                  <div className="flex justify-center gap-4">
+                    <div className="flex flex-col">
                       <label className="block text-sm font-medium text-gray-700 mb-2 mt-4">
                         Nom
                       </label>
@@ -184,7 +167,7 @@ function RendezVou() {
                     </div>
                   </div>
                 </div>
-                <div className="email mt-12">
+                <div className="flex flex-col mt-12">
                   <label className="block text-sm font-medium text-gray-700">
                     Email
                   </label>
@@ -200,9 +183,9 @@ function RendezVou() {
                     />
                   </div>
                 </div>
-                <div className="Nom-Prenom">
-                  <div className="flex justify-center gap-4 ">
-                    <div className="flex flex-col ">
+                <div className="w-[291px] h-12.5 grid grid-cols-1 gap-4">
+                  <div className="flex justify-center gap-4 ml-11">
+                    <div className="flex flex-col">
                       <label className="block text-sm font-medium text-gray-700 mb-2 mt-4">
                         Date de naissance
                       </label>
@@ -237,7 +220,7 @@ function RendezVou() {
                     </div>
                   </div>
                 </div>
-                <div className="email mt-12">
+                <div className="flex flex-col mt-12">
                   <label className="block text-sm font-medium text-gray-700">
                     Sélectionner la date et heure
                   </label>
@@ -250,12 +233,12 @@ function RendezVou() {
                       placeholder="18 / 08 / 2026 à 11:15"
                       required
                       value={formData.dateRendezVous}
-                      onChange={handleInputChange}
+                      readOnly
                     />
                   </div>
                 </div>
-                <div className="email mt-8">
-                  <button 
+                <div className="flex flex-col mt-8">
+                  <button
                     type="submit"
                     className="relative w-84 h-10 border-transparent bg-gradient-to-r from-[#0FDCBC] to-[#0dc9af] rounded-4xl text-white font-bold shadow-lg hover:cursor-pointer hover:shadow-[0_0_25px_rgba(15,220,188,0.6)] transition-all duration-500 group"
                   >
